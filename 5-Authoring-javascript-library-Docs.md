@@ -158,3 +158,144 @@ Ya tenemos una nueva rama en nuestro repositorio llamada `gh-pages` con nuestra 
 Cuando termine, nos mostrará la ruta de nuestra documentación: [https://fvena.github.io/javascript-library-starter/](https://fvena.github.io/javascript-library-starter/).
 
 > Es posible que pasen algunos segundos antes de que el contenido sea visible.
+
+## Licencia
+
+Una licencia de software es un contrato entre el desarrollador y los posibles usuarios indicando los usos que pueden hacerse del software. Hay mucha literatura sobre esto, y muchas opciones, en nuestro caso, al tratarse de proyecto open source, elegiremos la licencia MIT (se originó en el MIT, _Masschusetts Institute of Technology_).
+
+Básicamente esta licencia permite que cualquier usuario pueda usar, copiar, modificar, fusionar, publicar, distribuir y/o vender copias del software, es decir, que pueda hacer lo que quiera con el.
+
+Es posible que en un primer momento pienses que es demasiado, es tu código, tu tiempo, tu esfuerzo y tu ilusión, y permitir que cualquiera pueda usarlo o hacerlo suyo te dé reparo, pero lo cierto, es que esta plantilla o casi cualquier proyecto que desarrolles está utilizando cientos de librerías de personas que las han compartido.
+
+Vamos, que la mayoría no podríamos desarrollar nada sin la colaboración desinteresada de millones de desarrolladores, piensa que esta será tu pequeña contribución por todo lo que has recibido.
+
+Añadir una licencia es bastante sencillo, simplemente generamos un archivo `LICENSE` en la raíz de nuestro proyecto y copiamos el texto de nuestra licencia, en nuestro caso:
+
+```md
+MIT License
+
+Copyright (c) <YEAR> <COPYRIGHT HOLDER>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+<details>
+  <summary><strong>Traducción español</strong></summary>
+
+  ```md
+  MIT License
+
+  Copyright <AÑO> <TITULAR DEL COPYRIGHT>
+
+  Por la presente se concede permiso, libre de cargos, a cualquier persona que obtenga una copia de este software y de los archivos de documentación asociados (el "Software"), a utilizar el Software sin restricción, incluyendo sin limitación los derechos a usar, copiar, modificar, fusionar, publicar, distribuir, sublicenciar, y/o vender copias del Software, y a permitir a las personas a las que se les proporcione el Software a hacer lo mismo, sujeto a las siguientes condiciones:
+
+  El aviso de copyright anterior y este aviso de permiso se incluirán en todas las copias o partes sustanciales del Software.
+
+  EL SOFTWARE SE PROPORCIONA "COMO ESTA", SIN GARANTÍA DE NINGÚN TIPO, EXPRESA O IMPLÍCITA, INCLUYENDO PERO NO LIMITADO A GARANTÍAS DE COMERCIALIZACIÓN, IDONEIDAD PARA UN PROPÓSITO PARTICULAR E INCUMPLIMIENTO. EN NINGÚN CASO LOS AUTORES O PROPIETARIOS DE LOS DERECHOS DE AUTOR SERÁN RESPONSABLES DE NINGUNA RECLAMACIÓN, DAÑOS U OTRAS RESPONSABILIDADES, YA SEA EN UNA ACCIÓN DE CONTRATO, AGRAVIO O CUALQUIER OTRO MOTIVO, DERIVADAS DE, FUERA DE O EN CONEXIÓN CON EL SOFTWARE O SU USO U OTRO TIPO DE ACCIONES EN EL SOFTWARE.
+  ```
+
+</details>
+
+<br>
+
+Solo tienes que sustituir en la línea 3 `YEAR` por el año en curso y `COPYRIGHT HOLDER` con tu nombre:
+
+```md
+Copyright (c) 2021 Francisco Vena
+```
+
+## Colaboración
+
+La base de todo proyecto open source es la colaboración, facilitar a tus usuarios que puedan colaborar...
+
+Vamos a añadir un par de plantillas de error, estas plantillas se mostrarán cuando un usuario quiera reportar un error en nuestro repositorio. Crearemos dos, una para reportar errores y otra para solicitar nueva funcionalidad.
+
+GitHub automatiza mucho este proceso, solo tienes que crear la carpeta `.github/ISSUE_TEMPLATE` y añadir las plantillas que quieras, GitHub la mostrará automaticamente cuando un usuario pulse en crear un nuevo error.
+
+```sh
+touch .github/ISSUE_TEMPLATE/reportar-un-error.md
+touch .github/ISSUE_TEMPLATE/solicitar-funcionalidad.md
+```
+
+```md
+---
+name: Reportar un error
+about: Reporta un error para ayudarnos a mejorar
+title: ''
+labels: bug
+assignees: fvena
+---
+
+**Describe el error**
+Una descripción clara y concisa del error.
+
+**Reproducir el error**
+Pasos para reproducir el error:
+
+1. Ir a '...'
+2. Hacer click en '....'
+3. Hacer scroll hasta '....'
+4. Ver el error
+
+**Comportamiento esperado**
+Una descripción clara y concisa de lo que esperabas que ocurriese.
+
+**Captura**
+Si lo ves necesario, añade una captura de pantalla para ayudar a explicar el error.
+
+**Escritorio (completa la siguiente información):**
+
+- SO: [ej. iOS]
+- Navegador [ej. chrome, safari]
+- Versión [ej. 22]
+
+**Móviles (completa la siguiente información):**
+
+- Dispositivo: [ej. iPhone6]
+- SO: [ej. iOS8.1]
+- Navegador [ej. stock browser, safari]
+- Versión [ej. 22]
+
+**Información adicional**
+Cualquier otra información que pueda ser útil para reproducir el error.
+```
+
+```md
+---
+name: Solicitar funcionalidad
+about: Sugerir una idea para este proyecto
+title: ''
+labels: enhancement
+assignees: fvena
+---
+
+**¿Su solicitud de una nueva funcionalidad está relacionada con un problema? Por favor describalo.**
+Una descripción clara y concisa de cual es el problema. Ej. Estoy siempre cansado de [...]
+
+**Describe la solución que te gustaría**
+Una descripción clara y concisa de que quieres que ocurra.
+
+**Describa otras alternativas que hayas considerado**
+Una descripción clara y concisa de cualquier solución alternativa o funcionalidad que hayas considerado.
+
+**Información adicional**
+Añada cualquier otra información o captura que pueda ser útil.
+```
+
+También podemos crearlas automáticamente desde el propio repositorio.
