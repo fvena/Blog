@@ -12,7 +12,7 @@
 9. Documentar proyecto (README, Didor Docs, Contributtions, Licencia)
 10. Compilar la librería con Rollup.js
 11. Realizar publicaciones con Semantic Release
-12. Automatizar las publicaciones con Github actions
-13. Publicar nuestra documentación en Github pages
+12. Automatizar las publicaciones con GitHub actions
+13. Publicar nuestra documentación en GitHub pages
 14. Configurar Dependabot para tener actualizadas nuestras librerías
 15. Script para configurar la plantilla

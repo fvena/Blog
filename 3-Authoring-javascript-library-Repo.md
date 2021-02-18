@@ -1,8 +1,8 @@
 # Control de versiones
 
-## Crear un repositorio en Github
+## Crear un repositorio en GitHub
 
-Accede a tu cuenta de Github y pulsa sobre el botón `new repository`.
+Accede a tu cuenta de GitHub y pulsa sobre el botón `new repository`.
 
 Completa los campos, y pulsa el botón `Create repository`
 
@@ -27,7 +27,7 @@ node_modules
 dist
 ```
 
-El siguiente paso será iniciar un repositorio local al que añadiremos nuestro repositorio de Github como repositorio remoto.
+El siguiente paso será iniciar un repositorio local al que añadiremos nuestro repositorio de GitHub como repositorio remoto.
 
 ```sh
 git init
@@ -89,7 +89,7 @@ El **tipo** indica la naturaleza de los cambios, por defecto existen dos tipos:
 Existen otros tipos permitidos, los más extendidos están basados en [the Angular convention](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines). Nosotros también los utilizaremos para poder hacer commits más atómicos.
 
 - **build** - Cambios que solo afectan al _desarrollo_ como añadir librerías y configurarlas (ESLint, Prettier, gulp, ...).
-- **ci** (Continuous Integration) - Cambios relacionados con la integración continua de nuestro proyecto (travis, github actions, Circle, ...).
+- **ci** (Continuous Integration) - Cambios relacionados con la integración continua de nuestro proyecto (travis, GitHub actions, Circle, ...).
 - **docs** - Cambios solo en la documentación del proyecto
 - **perf** (Performance) - Cambios en el código para mejorar el rendimiento de la aplicación
 - **refactor** - Cambios en el código que no modifican la funcionalidad o solucionan errores
@@ -209,7 +209,7 @@ El asistente cuenta con los siguientes pasos:
 3. Descripción corta del commit
 4. Descripción larga, por si necesitamos explicar mejor o con más detalle los cambios realizados.
 5. Indicar si hay `breaking changes`, es decir, los cambios no son compatibles con versiones anteriores y el usuario tendrá que modificar su código.
-6. Indicar si el cambio afecta a algún error abierto (útil si gestionamos los errores a través de gitlab o github).
+6. Indicar si el cambio afecta a algún error abierto (útil si gestionamos los errores a través de gitlab o GitHub).
 
 > Al tener opciones por defecto o en algunos casos ser optativos podemos saltarnos un paso pulsando enter. También podemos cancelar el proceso y salirnos sin hacer el commit en cualquier paso pulsando `ctrl + c`.
 

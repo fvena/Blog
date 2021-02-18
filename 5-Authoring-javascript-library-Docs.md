@@ -35,7 +35,7 @@ En esta parte también podemos simplificar enormemente el proceso para conseguir
 
 Aunque la lista parece muy larga podemos conseguirlo con las siguientes herramientas:
 
-- **Github Pages** - Nos permite publicar la documentación desde nuestro repositorio, sin costes económicos y casi sin configuración.
+- **GitHub Pages** - Nos permite publicar la documentación desde nuestro repositorio, sin costes económicos y casi sin configuración.
 - **Didor Docs** - Completa herramienta para documentar proyectos con estilo.
 - **semantic-release** - Compila y publica la documentación automáticamente con cada nueva versión.
 
@@ -82,10 +82,79 @@ Con esto ya tenemos nuestra documentación lista para empezar a desarrollarla, a
 npm run docs
 ```
 
-## Publicar la documentación en Github pages
+## Publicar la documentación en GitHub pages
 
 Ahora que ya hemos documentado nuestra librería, el siguiente paso será publicarla para que todos puedan acceder a ella.
 
-Puedes publicar tu documentación donde tu quieras, en tu propio servidor, en netlify, ... Para este tutorial vamos a utilizar github pages y volveremos a utilizar github actions para automatizar el proceso
+Puedes publicar tu documentación en tu propio servidor, netlify, GitHub pages,... Para este tutorial vamos a utilizar GitHub pages y volveremos a utilizar GitHub Actions para automatizar el proceso.
 
-Comenzaremos entrando en los ajustes de nuestro repositorio de Github
+El primer paso es entender que es GitHub Pages:
+
+> GitHub Pages es un servidor de sitios estáticos que toma los archivos HTML, CSS y Javascript directamente de un repositorio. Por defecto utiliza la rama master pero podemos especificar otra rama.
+
+GitHub Pages genera un dominio para acceder al sitio web con nuestro nombre de usuario y el nombre de nuestro proyecto: [https://fvena.github.io/javascript-library-starter/](https://fvena.github.io/javascript-library-starter/) (si queremos, podemos cambiar el dominio por uno propio).
+
+En nuestro caso, no queremos que utilice el contenido que se encuentra en la raíz de nuestro proyecto ya que no se trata de una página web. GitHub Pages nos permitiría seleccionar un directorio que funcione como el `root` de nuestro servidor, pero esto nos obligaría a tener que añadir la documentación compilada a nuestro repositorio.
+
+> No deberíamos añadir a nuestro repositorio contenido que pueda generarse automaticamente: node_modules, dist, distdocs, ...
+
+El _truco_ consiste en crear una nueva rama que llamaremos `gh-pages` que solo contenga los archivos de la carpeta `distdocs`, y luego decirle a GitHub Pages que utilice la rama `gh-pages` en vez de la rama master.
+
+Con GitHub actions podemos crear un flujo que lo haga por nosotros de forma automática cada vez que actualicemos la rama master.
+
+Comenzaremos creando un nuevo flujo en nuestro directorio `.github/workflows` llamado `deploy-docs.yaml` con el siguiente contenido:
+
+```yaml
+name: Deploy docs
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  Deploy:
+    name: Deploy docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build documentation
+        run: npm run docs:build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./distdocs
+```
+
+Como podrás ver el flujo es muy parecido al que hicimos para automatizar las publicaciones de una nueva versión:
+
+1. **Checkout** - Clona nuestro repositorio
+2. **Install dependencias** - Instala las dependencias de nuestro proyecto con las versiones exactas que vienen en el archivo package-lock.json
+3. **Build documentation** - Genera nuestra documentación en el directorio `distdocs`
+4. **Deploy** - Crea una rama nueva con el nombre por defecto `gh-pages` con el contenido del directorio `distdocs`.
+
+En el paso **Deploy** utilizamos una acción creada por otro usuario, como cuando utilizamos una librería con npm, su configuración es muy sencilla, solo tenemos que indicarle el directorio que debe publicar.
+
+> Existen otros parámetros que podrían interesarte, miralos en la página [https://github.com/peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages)
+
+## Activar GitHub Pages para ver la documentación
+
+Ya tenemos una nueva rama en nuestro repositorio llamada `gh-pages` con nuestra documentación compilada. El siguiente paso es habilitar GitHub Pages y decirle que utilice esta rama (este paso solo tendremos que hacerlo la primera vez).
+
+1. Dirigite a tu repositorio de GitHub.
+
+2. Debajo del nombre de tu repositorio, haz click en <svg version="1.1" width="16" height="16" viewBox="0 0 16 16" class="octicon octicon-gear" aria-label="The gear icon" role="img"><path fill-rule="evenodd" d="M7.429 1.525a6.593 6.593 0 011.142 0c.036.003.108.036.137.146l.289 1.105c.147.56.55.967.997 1.189.174.086.341.183.501.29.417.278.97.423 1.53.27l1.102-.303c.11-.03.175.016.195.046.219.31.41.641.573.989.014.031.022.11-.059.19l-.815.806c-.411.406-.562.957-.53 1.456a4.588 4.588 0 010 .582c-.032.499.119 1.05.53 1.456l.815.806c.08.08.073.159.059.19a6.494 6.494 0 01-.573.99c-.02.029-.086.074-.195.045l-1.103-.303c-.559-.153-1.112-.008-1.529.27-.16.107-.327.204-.5.29-.449.222-.851.628-.998 1.189l-.289 1.105c-.029.11-.101.143-.137.146a6.613 6.613 0 01-1.142 0c-.036-.003-.108-.037-.137-.146l-.289-1.105c-.147-.56-.55-.967-.997-1.189a4.502 4.502 0 01-.501-.29c-.417-.278-.97-.423-1.53-.27l-1.102.303c-.11.03-.175-.016-.195-.046a6.492 6.492 0 01-.573-.989c-.014-.031-.022-.11.059-.19l.815-.806c.411-.406.562-.957.53-1.456a4.587 4.587 0 010-.582c.032-.499-.119-1.05-.53-1.456l-.815-.806c-.08-.08-.073-.159-.059-.19a6.44 6.44 0 01.573-.99c.02-.029.086-.075.195-.045l1.103.303c.559.153 1.112.008 1.529-.27.16-.107.327-.204.5-.29.449-.222.851-.628.998-1.189l.289-1.105c.029-.11.101-.143.137-.146zM8 0c-.236 0-.47.01-.701.03-.743.065-1.29.615-1.458 1.261l-.29 1.106c-.017.066-.078.158-.211.224a5.994 5.994 0 00-.668.386c-.123.082-.233.09-.3.071L3.27 2.776c-.644-.177-1.392.02-1.82.63a7.977 7.977 0 00-.704 1.217c-.315.675-.111 1.422.363 1.891l.815.806c.05.048.098.147.088.294a6.084 6.084 0 000 .772c.01.147-.038.246-.088.294l-.815.806c-.474.469-.678 1.216-.363 1.891.2.428.436.835.704 1.218.428.609 1.176.806 1.82.63l1.103-.303c.066-.019.176-.011.299.071.213.143.436.272.668.386.133.066.194.158.212.224l.289 1.106c.169.646.715 1.196 1.458 1.26a8.094 8.094 0 001.402 0c.743-.064 1.29-.614 1.458-1.26l.29-1.106c.017-.066.078-.158.211-.224a5.98 5.98 0 00.668-.386c.123-.082.233-.09.3-.071l1.102.302c.644.177 1.392-.02 1.82-.63.268-.382.505-.789.704-1.217.315-.675.111-1.422-.364-1.891l-.814-.806c-.05-.048-.098-.147-.088-.294a6.1 6.1 0 000-.772c-.01-.147.039-.246.088-.294l.814-.806c.475-.469.679-1.216.364-1.891a7.992 7.992 0 00-.704-1.218c-.428-.609-1.176-.806-1.82-.63l-1.103.303c-.066.019-.176.011-.299-.071a5.991 5.991 0 00-.668-.386c-.133-.066-.194-.158-.212-.224L10.16 1.29C9.99.645 9.444.095 8.701.031A8.094 8.094 0 008 0zm1.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM11 8a3 3 0 11-6 0 3 3 0 016 0z"></path></svg> **Settings**.
+
+3. En la sección **GitHub Pages**, selecciona en el desplegable dentro de `Source` la rama **gh-pages**.
+
+4. Dejamos `root` como directorio base y hacemos click en **Save**.
+
+Cuando termine, nos mostrará la ruta de nuestra documentación: [https://fvena.github.io/javascript-library-starter/](https://fvena.github.io/javascript-library-starter/).
+
+> Es posible que pasen algunos segundos antes de que el contenido sea visible.

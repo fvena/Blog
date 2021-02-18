@@ -51,7 +51,7 @@ Además `semantic-release` realiza otras muchas acciones por defecto por ti:
 
 Sería mucho mejor que todo esto se realizara en un servicio en la nube y sería aún mejor si se ejecute automáticamente cada vez que mergeemos un pull-request en la master.
 
-Aquí entra en juego las acciones de Github, donde definiremos todas las tareas que tiene que realizar para hacer una publicación.
+Aquí entra en juego las acciones de GitHub, donde definiremos todas las tareas que tiene que realizar para hacer una publicación.
 
 ## Requisitos previos
 
@@ -98,7 +98,7 @@ Los plugins por defecto utilizados por semantic-release son:
 - **@semantic-release/commit-analyzer** - Determina el tipo de versión analizando los commits
 - **@semantic-release/release-notes-generator** - Genera las notas de la versión con los cambios en base a los commits
 - **@semantic-release/npm** - Publica la nueva versión en NPM
-- **@semantic-release/github** - Publica la nueva versión en Github
+- **@semantic-release/github** - Publica la nueva versión en GitHub
 
 Aunque estos plugins están configurados por defecto, si añadimos otros plugins debemos indicarlos para que semantic-release sepa el orden en el que deben ejecutarse. Sino los añades, posiblemente no funcionen los que hayas elegido.
 
@@ -107,13 +107,13 @@ Aparte nosotros vamos a añadir otros dos plugins:
 - **@semantic-release/changelog** - Crea y actualiza el archivo `CHANGELOG.md` con los cambios de la versiones
 - **@semantic-release/git** - Genera un commit y actualiza el repositorio con los cambios en el archivo `CHANGELOG.md` y `package.json`.
 
-## Acciones de Github
+## Acciones de GitHub
 
-**TODO** Esplicar que son las acciones de Github
+**TODO** Explicar que son las acciones de GitHub
 
-El siguiente paso será definir las tareas que tiene que realizar GitHub cada vez que hagamos un push a la rama master. Para definir las acciones de Github, crearemos un directorio `.github` en la raíz de nuestro proyecto, y dentro de este creamos un nuevo directorio llamado `workflows` donde añadiremos el archivo yaml `release.yml`.
+El siguiente paso será definir las tareas que tiene que realizar GitHub cada vez que hagamos un push a la rama master. Para definir las acciones de GitHub, crearemos un directorio `.github` en la raíz de nuestro proyecto, y dentro de este creamos un nuevo directorio llamado `workflows` donde añadiremos el archivo yaml `release.yml`.
 
-El directorio `.github` es el predeterminado por Github para buscar todo lo relacionado con su configuración, en futuras versiones añadiremos más cosas. Github buscará por defecto los workflows en la carpeta `workflows`. Podemos utilizar el nombre que queramos para el archivo, ya que definiremos dentro el nombre para nuestro workflow.
+El directorio `.github` es el predeterminado por GitHub para buscar todo lo relacionado con su configuración, en futuras versiones añadiremos más cosas. GitHub buscará por defecto los workflows en la carpeta `workflows`. Podemos utilizar el nombre que queramos para el archivo, ya que definiremos dentro el nombre para nuestro workflow.
 
 ```sh
 touch .github/workflows/release.yml
@@ -160,7 +160,7 @@ on:
     branches: [master]
 ```
 
-La propiedad `on` le dice a Github cuando debe ejecutar el workflow, en este caso hemos especificado que se ejecute cuando hagamos un push a la rama master.
+La propiedad `on` le dice a GitHub cuando debe ejecutar el workflow, en este caso hemos especificado que se ejecute cuando hagamos un push a la rama master.
 
 ```yaml
 jobs:
@@ -199,7 +199,7 @@ steps:
 
    - Calcular el nuevo número de versión
    - Generar las notas con el cambio de versión
-   - Publicar la libreria en Github y NPM
+   - Publicar la librería en GitHub y NPM
    - Generar el archivo CHANGELOG.md
    - Realizar un commit para guardar los cambios en nuestro repositorio
 
@@ -207,19 +207,19 @@ Dado que algunos pasos necesitan autenticación y no hay ninguna persona sentada
 
 ## Obtener los tokens de autenticación
 
-Por seguridad, nunca introducimos aquí nuestros token, ya que cualquiera que inspeccione el repositorio podría verlos, en su lugar utilizaremos unas variables de entorno específicas de Github, que nos permiten almacenarlas en el proyecto de forma segura.
+Por seguridad, nunca introducimos aquí nuestros token, ya que cualquiera que inspeccione el repositorio podría verlos, en su lugar utilizaremos unas variables de entorno específicas de GitHub, que nos permiten almacenarlas en el proyecto de forma segura.
 
-Dado que el workflow se ejecuta dentro de nuestro repositorio de Github, y tenemos que ser un usuario autorizado para poder hacer push o pull-request, no es necesario que obtengamos un token para Github, por defecto, Github genera uno de forma automática de forma transparente para nosotros, por lo que solo nos quedaría obtener un token valido de NPM y configurarlo en nuestro proyecto.
+Dado que el workflow se ejecuta dentro de nuestro repositorio de GitHub, y tenemos que ser un usuario autorizado para poder hacer push o pull-request, no es necesario que obtengamos un token para GitHub, por defecto, GitHub genera uno de forma automática de forma transparente para nosotros, por lo que solo nos quedaría obtener un token valido de NPM y configurarlo en nuestro proyecto.
 
 Para obtener un token de NPM, vamos a nuestra cuenta y seleccionamos la opción `Auth Tokens` de nuestro menú de usuario. Una vez dentro seleccionamos `Create New Token`-
 
-A continuación, te preguntará que tipo de token quieres crear, ** TODO **
+A continuación, te preguntará que tipo de token quieres crear, **TODO**
 
 Copia el token que has creado y vamos a añadirlo a nuestro repositorio.
 
 ## Añadir el token NPM a nuestro repositorio
 
-De vuelta a nuestro repositorio de Github, dentro de los ajustes del repositorio seleccionamos la pestaña `Secrets` y hacemos click en `New Secret` para añadir una nueva variable de entorno secreta en nuestro repositorio.
+De vuelta a nuestro repositorio de GitHub, dentro de los ajustes del repositorio seleccionamos la pestaña `Secrets` y hacemos click en `New Secret` para añadir una nueva variable de entorno secreta en nuestro repositorio.
 
 En nombre introducimos `NPM_TOKEN` y en value pegamos nuestro token. Una vez guardemos nuestra variable secret, no podremos volver a verla, y solo los usuarios admin con acceso al repositorio podrían modificarla en un futuro.
 
@@ -229,7 +229,7 @@ Ya solo nos queda probar que todo funciona. Vamos a nuestro proyecto, realiza un
 
 Si todo ha ido bien, dirigete a la pestaña `actions` de tu repositiorio y verás como se está ejecutando tu workflow ...
 
-**TODO** Añadir imágenes de todo el proceso https://medium.com/javascript-in-plain-english/publish-update-npm-packages-with-github-actions-e4d786ffd62a
+**TODO** Añadir imágenes de todo el proceso <https://medium.com/javascript-in-plain-english/publish-update-npm-packages-with-github-actions-e4d786ffd62a>
 
 ## Flujo de desarrollo
 
@@ -237,6 +237,6 @@ Por defecto la primera versión que se crea es la 1.0.0 [Explicación](https://b
 
 **TODO** Definir el flujo para crear versiones beta/alpha y continuar el desarrollo con la versión 1.0.1-beta
 
-- [https://blog.greenkeeper.io/introduction-to-semver-d272990c44f2](https://blog.greenkeeper.io/introduction-to-semver-d272990c44f2
+- [https://blog.greenkeeper.io/introduction-to-semver-d272990c44f2](<https://blog.greenkeeper.io/introduction-to-semver-d272990c44f2>
 
 - [https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/pre-releases.md](https://github.com/semantic-release/semantic-release/blob/master/docs/recipes/pre-releases.md))

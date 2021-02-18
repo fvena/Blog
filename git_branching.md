@@ -3,13 +3,13 @@
 Definir una estrategia para gestionar tu repositorio es clave, pueden existir tantas estrategias como desarrolladores, pero las más comunes son:
 
 * [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)
-* [GitHub Flow](http://scottchacon.com/2011/08/31/github-flow.html)
+* [GitHub Flow](https://guides.github.com/introduction/flow/)
 * [GitLab Flow](https://about.gitlab.com/topics/version-control/what-is-gitlab-flow/)
 * [One Flow](https://www.endoflineblog.com/oneflow-a-git-branching-model-and-workflow)
 
 Si bien **Git Flow** es la más conocida, no te la recomiendo para desarrollar tu librería, ya que está pensado principalmente en tener varias versiones activas. Seguramente tu librería no tendrá distintas versiones que mantener, simplemente tendrás una única versión que irás mejorando a lo largo del tiempo y que siempre estará actualizada.
 
-Yo te recomiendo el flujo de **Github**, es simple y sencillo pero muy efectivo, se basa en los siguientes principios
+Yo te recomiendo el flujo de **GitHub**, es simple y sencillo pero muy efectivo, se basa en los siguientes principios
 
 **1. Todo lo que haya en la rama master está en producción**
 La rama master siempre está actualizada y desplegada en producción, en el peor de los casos será desplegada en unas horas.
@@ -34,7 +34,7 @@ Recuerda actualizar tu rama con los cambios de la rama master antes de realizar 
 
 **5. Publica los cambios inmediatamente**
 
-Una vez que hemos fusionado los cambios en la rama master debemos publicarlos para que siempre esté disponible la última versión de nuestra librería. Personalmente prefiero olvidarme de esta parte y automatizarla con `semantic-release` + `github actions`.
+Una vez que hemos fusionado los cambios en la rama master debemos publicarlos para que siempre esté disponible la última versión de nuestra librería. Personalmente prefiero olvidarme de esta parte y automatizarla con `semantic-release` + `GitHub actions`.
 
 Puedes añadir un bot que comunique al resto de desarrolladores que hay una versión nueva, para que sepan que tienen que actualizar su rama antes de hacer el pull request.
 
