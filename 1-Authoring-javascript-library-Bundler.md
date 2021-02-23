@@ -128,7 +128,7 @@ La configuración de babel será muy sencilla, solo necesitamos decirle a babel 
 ```json
 {
   ...
-  "presets": [["@babel/env", { "modules": false }]]
+  "presets": [ "@babel/env" ]
 }
 ```
 
