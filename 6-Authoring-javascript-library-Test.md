@@ -21,9 +21,3 @@ El siguiente paso será configurar jest en nuestro `package.json`, siguiendo nue
 Jest viene preconfigurado para poder ejecutarlo sin tener que hacer nada, no obstante vamos a hacer un par de cambios:
 
 * **verbose** - Indica si en el terminal se muestra un listado con todos los test realizados o solo el resultado final. Sobretodo al principio, es interesante ver el listado de los test que se han pasado para ver que lo estamos haciendo correctamente
-
-* **collectCoverage** - Indica si se comprueba la cobertura del código testeado. Hay que tener en cuenta, que esto puede ralentizar bastante la ejecución de los test.
-
-* **coverageReporters** - Indica como se mostrará el resultado de
-
-[![HitCount](http://hits.dwyl.com/fvena/vite-plugin-i18n-resources.svg)](http://hits.dwyl.com/fvena/vite-plugin-i18n-resources)
