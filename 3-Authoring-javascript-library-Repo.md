@@ -125,7 +125,7 @@ Comenzaremos instalando `commitlint` para comprobar si nuestros commits están e
 npm install @commitlint/cli @commitlint/config-conventional --save-dev
 ```
 
-Después añadairemos la configuración al final del archivo `package.json` donde le indicamos que herede la configuración de `config-conventional`.
+Después añadiremos la configuración al final del archivo `package.json` donde le indicamos que herede la configuración de `config-conventional`.
 
 ```json
 {
